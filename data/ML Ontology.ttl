@@ -1,5 +1,5 @@
 ### Ontology file generated from ML Ontology.xlsx.
-### 2021-04-29 17:43:34.256912
+### 2022-10-19 15:39:26.092011
 
 
 # PREFIXES
@@ -509,7 +509,7 @@
     skos:prefLabel "Matthews correlation coefficient" ;
     skos:altLabel "MCC" ;
     rdfs:seeAlso <https://en.wikipedia.org/wiki/Confusion_matrix> .
-:Fowlkes_Mallows_index a :ML_prediction_performance_measure ;
+:Fowlkes–Mallows_index a :ML_prediction_performance_measure ;
     skos:prefLabel "Fowlkes–Mallows index" ;
     skos:altLabel "FM" ;
     rdfs:seeAlso <https://en.wikipedia.org/wiki/Confusion_matrix> .
