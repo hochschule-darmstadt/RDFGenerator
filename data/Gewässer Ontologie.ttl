@@ -1,5 +1,5 @@
 ### Ontology file generated from Gewässer Ontologie.xlsx.
-### 2021-02-17 16:41:48.376972
+### 2022-10-19 15:50:50.918611
 
 
 # PREFIXES
@@ -99,14 +99,14 @@
 :Großer_Fluss a :Gewässer_Typ ;
     skos:prefLabel "Großer Fluss" ;
     skos:broader :Fließgewässer ;
-    rdfs:comment "mündet in Strom" ;
+    rdfs:comment "Mündet in Strom" ;
     :natürlichkeits_typ :natürlich ;
     :breiten_typ :breit ;
     :lage_typ :oberirdisch .
 :Strom a :Gewässer_Typ , rdfs:Class ;
     skos:prefLabel "Strom" ;
     skos:broader :Fließgewässer ;
-    rdfs:comment "mündet in Meer" ;
+    rdfs:comment "Mündet in Meer" ;
     :natürlichkeits_typ :natürlich ;
     :breiten_typ :breit ;
     :lage_typ :oberirdisch .
@@ -392,10 +392,3 @@
     rdfs:comment "helltrüb" .
 :Klarwasserfluss a :Farb_Typ ;
     skos:prefLabel "Klarwasserfluss" .
-
-
-# Strom
-
-:Rhein a :Strom ;
-    skos:prefLabel "Rhein" ;
-    :länge "1232.7"^^xsd:float .
