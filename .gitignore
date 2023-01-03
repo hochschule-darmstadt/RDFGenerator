@@ -19,18 +19,6 @@ adapters/AutoKeras/structured_data_classifier
 *.pyproj
 .vs/
 
-!titanic_train.csv
-
-#VS Code
-#adapters/*/.vscode/
-adapters/*/.venv/
-controller/.venv/
-#controller/.vscode/
-*.log
-adapters/*/AutoMLs/predict_time_sources.py
-adapters/MLJAR/AutoML_*
-adapters/AutoKeras/structured_data_classifier/
-
 # Distribution / packaging
 .Python
 build/
@@ -159,52 +147,3 @@ dmypy.json
 #VSCode ignores
 .devcontainer
 #.vscode
-
-#User specific files
-frontend/src/Server/BlazorBoilerplate.Server/appsettings.json
-frontend/src/Server/BlazorBoilerplate.Server/Properties/launchSettings.json
-
-#controller ignores
-# ignore all output files, but keep the directories with the .gitkeep file
-controller/app-data/output/*/*
-!controller/app-data/output/*/.gitkeep
-controller/.vs
-controller/app-data\datasets/*
-
-#all adapter ignores
-# by adapter generated files, but keep the directories
-
-!*/*/app-data/training/.gitkeep
-*/*/app-data/training/*
-# ignore datasets, because they are mapped into the datasets directory via shared volume by the controller
-*/app-data/datasets/*
-*/*/app-data/datasets/*
-adapters/*/app-data/datasets/*
-!*/app-data/datasets/.gitkeep
-
-
-#AutoCVE
-
-#AutoGluon
-
-#AutoKeras
-
-#Auto-Pytorch
-
-#Autosklearn
-# temporary files
-AutoSklearn/tmp/
-
-#FLAML
-# output folder
-FLAML/templates/output
-# by adapter generated files
-*-export.zip
-*-job.json
-
-#MLJAR ignores
-#AutoMLs
-MLJAR/AutoML_*
-controller/app-data/analysis.json
-controller/app-data/datasets/*
-controller/app-data/training/*
