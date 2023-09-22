@@ -126,6 +126,11 @@ def generate_object_value(object, datatype, file):
         file.write(f' {validate_URI(object)}')
     else:
         suffix = rdf_data_type_suffix(datatype)
+        if datatype == 'boolean'  and isinstance(object, bool):
+            #sometimes a literal instead of a boolean python instance is returned, this will ensure that both case produce the correct format
+            #Case 1: isInstance == boolean (True / False) => "true"/"false"
+            #Case 2: literal "true"/"false" => "true"/"false"
+            object = str(object).lower()
         file.write(f' "{object}"{suffix}')
 
 
@@ -176,6 +181,7 @@ def rdf_data_type_suffix(datatype: str) -> str:
     if datatype in ['int', 'integer', 'Integer']: return '^^xsd:integer'
     elif datatype in ['float', 'Float']: return '^^xsd:float'
     elif datatype in ['date', 'Date']: return '^^xsd:date'
+    elif datatype in ['boolean', 'Boolean']: return '^^xsd:boolean'
     elif datatype in ['str', 'string', 'String']: return ''
     else: return ''
 
