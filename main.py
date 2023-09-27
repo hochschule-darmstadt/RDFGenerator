@@ -16,7 +16,7 @@ def generate_rdf_files():
     - One tab for each class
     - One row for each instance in a class
     - The first row contains column names. They must denote the predicates in SPO triples.
-      Datatypes must be enclosed by [ ], e.g., [rdfs:Class], [string], [int], [float], [date], [text]
+      Datatypes must be enclosed by [ ], e.g., [rdfs:Class], [string], [int], [float], [date], [boolean], [text]
     - The first column must contain the subject URI of SPO triple.
     - Cells in other columns contain objects in SPO triples. Multiple objects must be separated by |
     - Tabs containing parentheses in their name, e.g., (Info) are ignored
