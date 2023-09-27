@@ -16,7 +16,7 @@ def generate_rdf_files():
     - One tab for each class
     - One row for each instance in a class
     - The first row contains column names. They must denote the predicates in SPO triples.
-      Datatypes must be enclosed by [ ], e.g., [rdfs:Class], [string], [int], [float], [date]
+      Datatypes must be enclosed by [ ], e.g., [rdfs:Class], [string], [int], [float], [date], [boolean], [text]
     - The first column must contain the subject URI of SPO triple.
     - Cells in other columns contain objects in SPO triples. Multiple objects must be separated by |
     - Tabs containing parentheses in their name, e.g., (Info) are ignored
@@ -124,6 +124,12 @@ def generate_object_value(object, datatype, file):
         object = object.strip()
     if datatype == 'URI':
         file.write(f' {validate_URI(object)}')
+    elif datatype == 'text':
+        if "'" not in object: file.write(f" '''{object}'''")
+        elif '"' not in object: file.write(f' """{object}"""')
+        else: 
+            txt = object.replace('"', '\"')
+            file.write(f" '''{txt}'''")
     else:
         suffix = rdf_data_type_suffix(datatype)
         if datatype == 'boolean'  and isinstance(object, bool):
@@ -153,7 +159,8 @@ def extract_property_and_type(property_headline: str):
     """
     Extracts from a column headline property name and datatype according to convention.
 
-    Example: 'rdf:type [rdfs:Class]' will be split in property 'rdf:type' and datatype 'rdfs:Class'
+    Example: 'rdfs:label [string]' will be split in property 'rdfs:label' and datatype 'string'
+    Example: 'a [rdfs:Class]' will be split in property 'a' and datatype 'URI'
 
     :param property_headline: string representing column headline
     :return: a tuple of 2 strings representing property and datatype. Default value for datatype if none is given: 'URI'
@@ -163,9 +170,14 @@ def extract_property_and_type(property_headline: str):
     if start != -1 and end != -1:
         property = property_headline[:start].strip()
         datatype = property_headline[start+1:end].strip()
-        if ':' in datatype:
-            datatype = 'URI'
-        return property, datatype
+        if ':' in datatype: type = 'URI'
+        elif datatype in ['int', 'integer', 'Integer']: type = 'integer'
+        elif datatype in ['float', 'Float']: type = 'float'
+        elif datatype in ['date', 'Date']: type = 'date'
+        elif datatype in ['boolean', 'Boolean']: type = 'boolean'
+        elif datatype in ['str', 'string', 'String']: type = 'string'
+        elif datatype in ['text', 'Text']: type = 'text'
+        return property, type
     else:
         return property_headline.strip(), 'URI'     # if no explit datatype is provided in [ ] then URI is assumed
 
@@ -178,11 +190,11 @@ def rdf_data_type_suffix(datatype: str) -> str:
     :param datatype: 'string', 'int', 'float' or 'date'
     :return: XSD datatype specification or '' for strings
     """
-    if datatype in ['int', 'integer', 'Integer']: return '^^xsd:integer'
-    elif datatype in ['float', 'Float']: return '^^xsd:float'
-    elif datatype in ['date', 'Date']: return '^^xsd:date'
-    elif datatype in ['boolean', 'Boolean']: return '^^xsd:boolean'
-    elif datatype in ['str', 'string', 'String']: return ''
+    if datatype in ['integer']: return '^^xsd:integer'
+    elif datatype in ['float']: return '^^xsd:float'
+    elif datatype in ['date']: return '^^xsd:date'
+    elif datatype in ['boolean']: return '^^xsd:boolean'
+    elif datatype in ['string']: return ''
     else: return ''
 
 
